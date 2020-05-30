@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {ConnectionService} from '../../_Services/connection.service';
+import {AlertController} from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +13,12 @@ export class LoginComponent implements OnInit {
   private form: FormGroup;
   private dashboardUrl = '/dashboard/task';
 
-  constructor(private fb: FormBuilder, private router: Router, private connectionService: ConnectionService) { }
+  constructor(
+      private fb: FormBuilder,
+      private router: Router,
+      private connectionService: ConnectionService,
+      private alertController: AlertController
+  ) { }
 
   ngOnInit() {
     if (sessionStorage.getItem('auth') !== null) {
@@ -22,6 +28,17 @@ export class LoginComponent implements OnInit {
       username : ['', Validators.required],
       password : ['', Validators.required]
     });
+  }
+
+  async showAlert(msg: string) {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Échec',
+      subHeader: msg,
+      // message: msg,
+      buttons: ['OK']
+    });
+    await alert.present();
   }
 
   onLogin() {
@@ -38,7 +55,7 @@ export class LoginComponent implements OnInit {
             sessionStorage.setItem('auth', undefined);
             sessionStorage.clear();
             this.form.reset();
-            window.alert('Identifiants incorrects');
+            this.showAlert('Identifiants incorrects');
           }
         },
         /*
@@ -49,7 +66,7 @@ export class LoginComponent implements OnInit {
           sessionStorage.setItem('auth', undefined);
           sessionStorage.clear();
           this.form.reset();
-          window.alert('Identifiants incorrects');
+          this.showAlert('Identifiants incorrects');
         }
     );
   }

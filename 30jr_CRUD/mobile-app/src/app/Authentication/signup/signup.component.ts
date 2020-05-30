@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ConnectionService} from '../../_Services/connection.service';
 import {Router} from '@angular/router';
+import {AlertController} from '@ionic/angular';
 
 @Component({
   selector: 'app-signup',
@@ -14,7 +15,12 @@ export class SignupComponent implements OnInit {
   private pwdPat: RegExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/;
   private dashboardUrl = '/dashboard/task';
 
-  constructor(private fb: FormBuilder, private router: Router, private connectionService: ConnectionService) { }
+  constructor(
+      private fb: FormBuilder,
+      private router: Router,
+      private connectionService: ConnectionService,
+      private alertController: AlertController
+  ) { }
 
   ngOnInit() {
     if (sessionStorage.getItem('auth') !== null) {
@@ -25,6 +31,17 @@ export class SignupComponent implements OnInit {
       password : ['', Validators.compose([Validators.required, Validators.pattern(this.pwdPat)])],
       newsletter : [false]
     });
+  }
+
+  async showAlert(msg: string) {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Échec',
+      subHeader: msg,
+      // message: msg,
+      buttons: ['OK']
+    });
+    await alert.present();
   }
 
   onSignup() {
@@ -38,7 +55,7 @@ export class SignupComponent implements OnInit {
             sessionStorage.setItem('auth', undefined);
             sessionStorage.clear();
             this.form.reset();
-            window.alert(response.msg);
+            this.showAlert(response.msg);
           }
         },
         error => {
@@ -46,7 +63,7 @@ export class SignupComponent implements OnInit {
           sessionStorage.clear();
           this.form.reset();
           console.log('error', error);
-          window.alert(error.message);
+          this.showAlert(error.message);
         }
     );
   }
