@@ -12,7 +12,10 @@
       <ion-item>
         <ion-input formControlName="password" placeholder="Mot de passe" type="password"></ion-input>
       </ion-item>
-      <br><br><ion-button color="primary" type="submit" [disabled]="form.invalid">Se connecter</ion-button>
+      <ion-button color="primary" type="submit" [disabled]="form.invalid">Se connecter</ion-button>
     </form>
+    <div style="text-align: center; padding-top: 25px">
+      <ion-button [routerLink]="['/signup']" color="tertiary">Créer un compte</ion-button>
+    </div>
   </ion-content>
 </ion-app>

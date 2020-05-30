@@ -10,12 +10,13 @@ import {ConnectionService} from '../../_Services/connection.service';
 })
 export class LoginComponent implements OnInit {
   private form: FormGroup;
+  private dashboardUrl = '/dashboard/task';
 
   constructor(private fb: FormBuilder, private router: Router, private connectionService: ConnectionService) { }
 
   ngOnInit() {
     if (sessionStorage.getItem('auth') !== null) {
-      this.router.navigateByUrl('/dashboard/path/read'); //TODO
+      this.router.navigateByUrl(this.dashboardUrl);
     }
     this.form = this.fb.group({
       username : ['', Validators.required],
@@ -29,7 +30,7 @@ export class LoginComponent implements OnInit {
     this.connectionService.connect(DTO).subscribe(response => {
           if (response !== null && response.userRole === 'USER') {
             this.connectionService.authenticated = true;
-            this.router.navigateByUrl('/dashboard/path/read'); // TODO
+            this.router.navigateByUrl(this.dashboardUrl); // TODO
           } else {
             /*
             L'utilisateur existe mais ce n'est pas un "user"

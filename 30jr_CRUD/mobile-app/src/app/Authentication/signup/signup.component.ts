@@ -10,16 +10,19 @@ import {Router} from '@angular/router';
 })
 export class SignupComponent implements OnInit {
   private form: FormGroup;
+  private mailPat: RegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  private pwdPat: RegExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/;
+  private dashboardUrl = '/dashboard/task';
 
   constructor(private fb: FormBuilder, private router: Router, private connectionService: ConnectionService) { }
 
   ngOnInit() {
     if (sessionStorage.getItem('auth') !== null) {
-      this.router.navigateByUrl('/dashboard/path/read'); // TODO
+      this.router.navigateByUrl(this.dashboardUrl);
     }
     this.form = this.fb.group({
-      username : ['', Validators.compose([Validators.required, Validators.email, Validators.pattern(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)])],
-      password : ['', Validators.compose([Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/)])],
+      username : ['', Validators.compose([Validators.required, Validators.email, Validators.pattern(this.mailPat)])],
+      password : ['', Validators.compose([Validators.required, Validators.pattern(this.pwdPat)])],
       newsletter : [false]
     });
   }
@@ -30,7 +33,7 @@ export class SignupComponent implements OnInit {
       console.log('response', response)
           if (response !== null && response.aBoolean === true) {
             this.connectionService.authenticated = true;
-            this.router.navigateByUrl('/login'); // TODO
+            this.router.navigateByUrl(this.dashboardUrl);
           } else {
             sessionStorage.setItem('auth', undefined);
             sessionStorage.clear();

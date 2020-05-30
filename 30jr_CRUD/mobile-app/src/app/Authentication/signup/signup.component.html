@@ -16,7 +16,10 @@
         <ion-checkbox formControlName="newsletter"></ion-checkbox>
         <ion-text style="padding: 10px; font-size: 15px">Newsletter : reçois chaque mois des atuces pour simplifier ta vie</ion-text>
         </ion-item>
-      <br><br><ion-button color="primary" type="submit" [disabled]="form.invalid">S'inscrire</ion-button>
+      <ion-button color="primary" type="submit" [disabled]="form.invalid">S'inscrire</ion-button>
     </form>
+    <div style="text-align: center; padding-top: 25px">
+      <ion-button [routerLink]="['./..']" color="tertiary">J'ai déjà un compte</ion-button>
+    </div>
   </ion-content>
 </ion-app>
