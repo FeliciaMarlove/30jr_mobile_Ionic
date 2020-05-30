@@ -1,3 +1,16 @@
-<p>
-  login works!
-</p>
+<ion-app>
+  <ion-content>
+    <img src="./assets/illustrations/headlog.png">
+    <ion-title>30 jours pour désencombrer</ion-title>
+    <form style="text-align: center" [formGroup]="form" (ngSubmit)="onLogin()">
+      <br><br>
+      <ion-item>
+        <ion-input formControlName="username" placeholder="Identifiant" type="email"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input formControlName="password" placeholder="Mot de passe" type="password"></ion-input>
+      </ion-item>
+      <br><br><ion-button color="primary" type="submit" [disabled]="form.invalid">Se connecter</ion-button>
+    </form>
+  </ion-content>
+</ion-app>
