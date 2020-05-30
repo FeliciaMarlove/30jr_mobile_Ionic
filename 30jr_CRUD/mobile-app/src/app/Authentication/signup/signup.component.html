@@ -1,3 +1,22 @@
-<p>
-  signup works!
-</p>
+<ion-app>
+  <ion-content>
+    <img src="./assets/illustrations/headlog.png">
+    <ion-title>30 jours pour désencombrer</ion-title>
+    <form style="text-align: center" [formGroup]="form" (ngSubmit)="onSignup()">
+      <br>
+      Inscription
+      <br><br>
+      <ion-item>
+        <ion-input formControlName="username" placeholder="Identifiant" type="email"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input formControlName="password" placeholder="Mot de passe" type="password"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-checkbox formControlName="newsletter"></ion-checkbox>
+        <ion-text style="padding: 10px; font-size: 15px">Newsletter : reçois chaque mois des atuces pour simplifier ta vie</ion-text>
+        </ion-item>
+      <br><br><ion-button color="primary" type="submit" [disabled]="form.invalid">S'inscrire</ion-button>
+    </form>
+  </ion-content>
+</ion-app>
