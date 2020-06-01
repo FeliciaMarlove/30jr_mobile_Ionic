@@ -16,11 +16,7 @@ export class ButtonsComponent implements OnInit {
     }
 
     onLogout() {
-        this.connectionService.authenticated = false;
-        sessionStorage.setItem('auth', undefined);
-        sessionStorage.removeItem('auth');
-        sessionStorage.clear();
-        this.router.navigateByUrl('/');
+        this.connectionService.logout();
     }
 
     toPerso() {
