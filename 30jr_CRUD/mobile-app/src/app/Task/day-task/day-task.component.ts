@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {Router} from '@angular/router';
+import {TaskService} from '../../_Services/task.service';
 
 @Component({
   selector: 'app-day-task',
@@ -7,8 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DayTaskComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+      private router: Router,
+      private taskService: TaskService
+  ) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
 }

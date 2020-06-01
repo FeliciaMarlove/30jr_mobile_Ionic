@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {PreloadAllModules, RouterModule, Routes} from '@angular/router';
+import {PreloadAllModules, Router, RouterModule, Routes} from '@angular/router';
 import {FrontPageComponent} from './Containers/front-page/front-page.component';
 import {LoginComponent} from './Authentication/login/login.component';
 import {SignupComponent} from './Authentication/signup/signup.component';
@@ -17,16 +17,18 @@ const routes: Routes = [
     { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard], children: [
             { path: 'path', component: PathChoiceComponent},
             { path: 'task', component: DayTaskComponent},
-            { path: 'perso', component: PersonalSpaceComponent}
+            { path: 'perso', component: PersonalSpaceComponent},
+            { path: '', redirectTo: 'task', pathMatch: 'full'},
         ]},
     { path: '**', component: LoginComponent}
 ];
 
 @NgModule({
     imports: [
-        RouterModule.forRoot(routes, {preloadingStrategy: PreloadAllModules})
+        RouterModule.forRoot(routes
+            , {preloadingStrategy: PreloadAllModules}
+            )
     ],
     exports: [RouterModule]
 })
-export class AppRoutingModule {
-}
+export class AppRoutingModule {}
