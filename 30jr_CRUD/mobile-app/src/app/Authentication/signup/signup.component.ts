@@ -13,7 +13,7 @@ export class SignupComponent implements OnInit {
   private form: FormGroup;
   private mailPat: RegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   private pwdPat: RegExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/;
-  private dashboardUrl = '/dashboard/task';
+  private dashboardUrl = './../dashboard/task';
 
   constructor(
       private fb: FormBuilder,
@@ -47,10 +47,12 @@ export class SignupComponent implements OnInit {
   onSignup() {
     const DTO = {email: this.form.controls.username.value, password: this.form.controls.password.value, newsletter: this.form.controls.newsletter.value};
     this.connectionService.signup(DTO).subscribe(response => {
-      console.log('response', response)
-          if (response !== null && response.aBoolean === true) {
+          // console.log('response', response)
+          if (response !== null && response.userId) {
             this.connectionService.authenticated = true;
-            this.router.navigateByUrl(this.dashboardUrl);
+            sessionStorage.setItem('user', response.userId.toString());
+            this.router.navigateByUrl('');
+            this.connectionService.connect(DTO).subscribe();
           } else {
             sessionStorage.setItem('auth', undefined);
             sessionStorage.clear();

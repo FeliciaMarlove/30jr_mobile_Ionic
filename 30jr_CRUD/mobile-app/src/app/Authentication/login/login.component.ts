@@ -45,9 +45,11 @@ export class LoginComponent implements OnInit {
     const DTO = {email: this.form.controls.username.value, password: this.form.controls.password.value};
     console.log(DTO)
     this.connectionService.connect(DTO).subscribe(response => {
+          // console.log(response);
           if (response !== null && response.userRole === 'USER') {
             this.connectionService.authenticated = true;
-            this.router.navigateByUrl(this.dashboardUrl); // TODO
+            sessionStorage.setItem('user', response.userId.toString());
+            this.router.navigateByUrl(this.dashboardUrl);
           } else {
             /*
             L'utilisateur existe mais ce n'est pas un "user"
