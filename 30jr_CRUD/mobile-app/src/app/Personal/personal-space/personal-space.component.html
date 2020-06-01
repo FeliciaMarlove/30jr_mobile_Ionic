@@ -1,12 +1,18 @@
 <ion-content>
-    <form style="text-align: center" [formGroup]="form" (ngSubmit)="onUpdate()">
-        <ion-input formControlName="email" type="email"></ion-input>
-        <ion-checkbox formControlName="newsletter"></ion-checkbox>
-        <ion-text style="padding: 10px; font-size: 15px">Newsletter : reçois chaque mois des atuces pour simplifier
-            ta vie
-        </ion-text>
+    <form *ngIf="form" style="text-align: center" [formGroup]="form" (ngSubmit)="onUpdate()">
+        <ion-item>
+            <ion-input formControlName="email" type="email"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-checkbox formControlName="newsletter"></ion-checkbox>
+            <ion-text style="padding: 10px; font-size: 15px">Newsletter : reçois chaque mois des atuces pour simplifier
+                ta vie
+            </ion-text>
+        </ion-item>
         <br>
-        <ion-button color="primary" type="submit" [disabled]="form.invalid">Enregistrer</ion-button>
+        <ion-button color="primary" type="submit" [disabled]="form.pristine || form.invalid">Enregistrer</ion-button>
+        <br>
+        <ion-text *ngIf="success">Informations mises à jour</ion-text>
     </form>
   <div style="text-align: center">
     <a style="color: red" (click)="onDelete()">Supprimer mon compte (définitif)</a>

@@ -14,6 +14,7 @@ export class PersonalSpaceComponent implements OnInit {
     private form: FormGroup;
     private user: User;
     private mailPat: RegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  private success: boolean;
 
   constructor(
       private fb: FormBuilder,
@@ -23,27 +24,34 @@ export class PersonalSpaceComponent implements OnInit {
   ) {  }
 
   ngOnInit() {
-    console.log('ng On Init')
     this.initPersonal();
   }
 
   ionViewWillEnter(){
-    console.log('ion View Will Enter')
-    // this.initPersonal()
   }
 
   initPersonal() {
     this.userService.read((Number)(sessionStorage.getItem('user'))).subscribe( user => {
-      console.log(user);
       this.user = user;
-      this.form = this.fb.group( {
-        email: [this.user.email, Validators.compose([Validators.required, Validators.email, Validators.pattern(this.mailPat)])],
-        newsletter: [this.user.newsletter]
-      });
+      if ((Number)(sessionStorage.getItem('user')) === this.user.userId) {
+        this.form = this.fb.group({
+          email: [this.user?.email, Validators.compose([Validators.required, Validators.email, Validators.pattern(this.mailPat)])],
+          newsletter: [this.user?.newsletter]
+        });
+      }
     });
   }
 
   onUpdate() {
+    if ((Number)(sessionStorage.getItem('user')) === this.user.userId) {
+      this.userService.update(this.user.userId, this.form.value).subscribe(response => {
+        if (response != null && response.userId) {
+          this.success = true;
+        } else {
+          console.log(response.msg);
+        }
+      });
+    }
   }
 
   onDelete() {

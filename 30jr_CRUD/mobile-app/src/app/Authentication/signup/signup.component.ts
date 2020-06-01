@@ -35,7 +35,7 @@ export class SignupComponent implements OnInit {
 
   async showAlert(msg: string) {
     const alert = await this.alertController.create({
-      cssClass: 'my-custom-class',
+      // cssClass: 'my-custom-class',
       header: 'Échec',
       subHeader: msg,
       // message: msg,
@@ -52,7 +52,7 @@ export class SignupComponent implements OnInit {
             this.connectionService.authenticated = true;
             sessionStorage.setItem('user', response.userId.toString());
             this.router.navigateByUrl('');
-            this.connectionService.connect(DTO).subscribe();
+            this.connectionService.connect(DTO).subscribe( response => console.log (response));
           } else {
             sessionStorage.setItem('auth', undefined);
             sessionStorage.clear();
