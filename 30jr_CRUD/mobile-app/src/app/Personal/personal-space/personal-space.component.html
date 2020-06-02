@@ -1,13 +1,14 @@
 <ion-content>
-    <ion-text>Espace personnel</ion-text>
-    <ion-icon name="home" [routerLink]="['./../task']"></ion-icon>
-    <form *ngIf="form" style="text-align: center" [formGroup]="form" (ngSubmit)="onUpdate()">
+    <div style="text-align: left !important;"><ion-text class="in-title">Espace personnel</ion-text></div>
+    <div style="text-align: right !important;"><ion-icon name="home" [routerLink]="['./../task']"></ion-icon></div>
+    <form style="padding: 25px" *ngIf="form" style="text-align: center" [formGroup]="form" (ngSubmit)="onUpdate()">
+        <br>
         <ion-item>
-            <ion-input formControlName="email" type="email"></ion-input>
+            <ion-input style="border: 1px grey solid;" formControlName="email" type="email"></ion-input>
         </ion-item>
-        <ion-item *ngIf="user.newsletter === false">
+        <ion-item *ngIf="user.newsletter === false" lines="none">
             <ion-checkbox formControlName="newsletter"></ion-checkbox>
-            <ion-text style="padding: 10px; font-size: 15px">Newsletter : reçois chaque mois des atuces pour simplifier ta vie
+            <ion-text class="in-form" style="padding: 10px; font-size: 15px">Newsletter : reçois chaque mois des atuces pour simplifier ta vie
             </ion-text>
         </ion-item>
         <br>
@@ -17,7 +18,9 @@
         <ion-text *ngIf="success">Informations mises à jour</ion-text>
     </form>
   <div style="text-align: center">
+      <br><br>
     <a style="color: red" (click)="onDelete()">Supprimer mon compte (définitif)</a>
   </div>
+    <br><br>
     <ion-icon name="mail" (click)="onSend()"></ion-icon>
 </ion-content>
