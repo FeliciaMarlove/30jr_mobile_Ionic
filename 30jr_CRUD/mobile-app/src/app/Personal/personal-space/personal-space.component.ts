@@ -4,6 +4,7 @@ import {Router} from '@angular/router';
 import {User} from '../../_Models/user';
 import {UserService} from '../../_Services/user.service';
 import {ConnectionService} from '../../_Services/connection.service';
+import {AlertController} from '@ionic/angular';
 
 @Component({
   selector: 'app-personal-space',
@@ -20,7 +21,8 @@ export class PersonalSpaceComponent implements OnInit {
       private fb: FormBuilder,
       private router: Router,
       private userService: UserService,
-      private connectionService: ConnectionService
+      private connectionService: ConnectionService,
+      private alertController: AlertController
   ) {  }
 
   ngOnInit() {
@@ -28,6 +30,45 @@ export class PersonalSpaceComponent implements OnInit {
   }
 
   ionViewWillEnter(){
+  }
+
+  async showAlert(msg: string) {
+    const alert = await this.alertController.create({
+      // cssClass: 'my-custom-class',
+      header: 'Information',
+      subHeader: msg,
+      // message: msg,
+      buttons: ['OK']
+    });
+    await alert.present();
+  }
+
+  async confirmAlert() {
+    const alert = await this.alertController.create({
+      // cssClass: 'confirm-alert',
+      header: 'CONFIRMATION',
+      message: 'ATTENTION. Cette action est définitive !',
+      buttons: [
+        {
+          text: 'Annuler',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel');
+          }
+        }, {
+          text: 'OK',
+          handler: () => {
+            this.userService.delete(this.user.userId).subscribe( response => {
+              if (response.aBoolean === true) {
+                this.showAlert('Votre compte a bien été supprimé');
+                this.connectionService.logout();
+              }
+            });
+          }
+        }
+      ]
+    });
+    await alert.present();
   }
 
   initPersonal() {
@@ -49,6 +90,7 @@ export class PersonalSpaceComponent implements OnInit {
           this.success = true;
         } else {
           console.log(response.msg);
+          this.showAlert('Cette adresse e-mail est déjà enregistrée');
         }
       });
     }
@@ -56,11 +98,11 @@ export class PersonalSpaceComponent implements OnInit {
 
   onDelete() {
     if ((Number)(sessionStorage.getItem('user')) === this.user.userId) {
-      this.userService.delete(this.user.userId).subscribe( response => {
-        if (response.aBoolean === true) {
-          this.connectionService.logout();
-        }
-      });
+      this.confirmAlert();
     }
+  }
+
+  onSend() {
+    this.showAlert('Ce bouton permettra bientôt d\'envoyer un message à l\'administrateur');
   }
 }

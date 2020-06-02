@@ -1,20 +1,23 @@
 <ion-content>
+    <ion-text>Espace personnel</ion-text>
+    <ion-icon name="home" [routerLink]="['./../task']"></ion-icon>
     <form *ngIf="form" style="text-align: center" [formGroup]="form" (ngSubmit)="onUpdate()">
         <ion-item>
             <ion-input formControlName="email" type="email"></ion-input>
         </ion-item>
-        <ion-item>
+        <ion-item *ngIf="user.newsletter === false">
             <ion-checkbox formControlName="newsletter"></ion-checkbox>
-            <ion-text style="padding: 10px; font-size: 15px">Newsletter : reçois chaque mois des atuces pour simplifier
-                ta vie
+            <ion-text style="padding: 10px; font-size: 15px">Newsletter : reçois chaque mois des atuces pour simplifier ta vie
             </ion-text>
         </ion-item>
         <br>
         <ion-button color="primary" type="submit" [disabled]="form.pristine || form.invalid">Enregistrer</ion-button>
         <br>
+        <ion-text *ngIf="form.dirty && form.controls.email.invalid">Le format d'e-mail n'est pas valide.</ion-text>
         <ion-text *ngIf="success">Informations mises à jour</ion-text>
     </form>
   <div style="text-align: center">
     <a style="color: red" (click)="onDelete()">Supprimer mon compte (définitif)</a>
   </div>
+    <ion-icon name="mail" (click)="onSend()"></ion-icon>
 </ion-content>
