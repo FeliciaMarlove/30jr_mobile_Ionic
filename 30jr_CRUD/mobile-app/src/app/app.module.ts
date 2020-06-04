@@ -22,6 +22,7 @@ import {DayTaskComponent} from './Task/day-task/day-task.component';
 import {FormBuilder, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/http';
 import {XhrInterceptor} from './_Security/xhr-interceptor';
+import {PopoverComponent} from './_Utils/popover/popover.component';
 
 @NgModule({
     declarations: [
@@ -36,7 +37,8 @@ import {XhrInterceptor} from './_Security/xhr-interceptor';
         PathChoiceComponent,
         PathListComponent,
         PersonalSpaceComponent,
-        DayTaskComponent
+        DayTaskComponent,
+        PopoverComponent
     ],
     entryComponents: [],
     imports: [

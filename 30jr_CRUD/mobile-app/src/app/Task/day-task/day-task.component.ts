@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import {TaskService} from '../../_Services/task.service';
 import {UserService} from '../../_Services/user.service';
-import { User } from 'src/app/_Models/user';
 import { Task } from 'src/app/_Models/task';
+import {PopoverController} from '@ionic/angular';
+import {PopoverComponent} from '../../_Utils/popover/popover.component';
 
 @Component({
   selector: 'app-day-task',
@@ -19,7 +20,8 @@ export class DayTaskComponent implements OnInit {
   constructor(
       private router: Router,
       private taskService: TaskService,
-      private userService: UserService
+      private userService: UserService,
+      private popoverController: PopoverController
   ) { }
 
   ngOnInit() {
@@ -43,7 +45,18 @@ export class DayTaskComponent implements OnInit {
     this.hasTask = true;
   }
 
-  onExpand() {
-    // TODO logique pour afficher le task long description dans un "expansion pane"
+  async presentPopover(ev: any) {
+    const popover = await this.popoverController.create({
+      // component where the template is :
+      component: PopoverComponent,
+      // pass parameters to the component :
+      componentProps: {content : this.task.taskLongDescription},
+      // don't make the backdrop (background behind) grey :
+      showBackdrop: false,
+      cssClass: 'popover',
+      event: ev,
+      translucent: true
+    });
+    return await popover.present();
   }
 }
