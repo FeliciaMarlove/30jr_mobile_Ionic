@@ -1,3 +1,12 @@
-<p>
-  day-task works!
-</p>
+<div *ngIf="hasTask === false">
+  {{noTaskText}}
+  <ion-button [routerLink]="['/dashboard/path']">Voir les parcours</ion-button>
+</div>
+<div *ngIf="hasTask === true">
+  {{title}}
+  {{task.taskName}}
+  {{task.taskShortDescription}}
+  <div *ngIf="task.taskLongDescription">
+    plus d'informations <ion-icon name="add-circle" (click)="onExpand()"></ion-icon>
+  </div>
+</div>

@@ -4,6 +4,7 @@ import {User} from '../_Models/user';
 import {Observable} from 'rxjs';
 
 const URI = 'http://localhost:8080/api/user/';
+const URI_TASKUSER = 'http://localhost:8080/api/userpath/';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  public read(id: number): Observable<User> {
+  public read(id: number): Observable<any> {
     return this.http.get<User>(URI + id);
   }
 
@@ -22,5 +23,9 @@ export class UserService {
 
   public delete(id: number): Observable<any> {
     return this.http.delete<User>(URI + id);
+  }
+  
+  public readTaskUser(id: number): Observable<any> {
+    return this.http.get(URI_TASKUSER + id);
   }
 }
