@@ -1,3 +1,14 @@
-<p>
-  path-choice works!
-</p>
+<ion-content style="border: orange 1px solid; padding: 10px;">
+
+<div
+        *ngFor="let path of paths"
+        style="text-align: left;"
+        [style.background]="path === selectedPath ? 'orange' : ''"
+        (click)="onSelect(path)">
+  {{path.pathName}} :
+  {{path.pathShortDescription}}
+  <ion-text *ngIf="path.pathLongDescription" (click)="presentPopover($event, path)">[+]
+  </ion-text>
+</div>
+</ion-content>
+<ion-button color="secondary" (click)="onStart()" [disabled]="!selectedPath">Commencer {{selectedPath?.pathName}}</ion-button>
