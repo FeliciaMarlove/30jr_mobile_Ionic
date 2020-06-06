@@ -28,4 +28,8 @@ export class UserService {
   public readTaskUser(id: number): Observable<any> {
     return this.http.get(URI_TASKUSER + id);
   }
+
+  public getDay(id: number): Observable<number> {
+    return this.http.get<number>(URI_TASKUSER + id + '/day');
+  }
 }

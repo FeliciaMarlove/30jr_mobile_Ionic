@@ -1,3 +1,13 @@
-<p>
-  notification works!
-</p>
+
+<ion-content>
+  <div *ngIf="notifDay === 10">
+    Le texte du jour 10
+  </div>
+  <div *ngIf="notifDay === 20">
+    Le texte du jour 20
+  </div>
+  <div *ngIf="notifDay === 30">
+    Le texte du jour 30
+  </div>
+  <ion-button (click)="dismiss()">Continuer</ion-button>
+</ion-content>

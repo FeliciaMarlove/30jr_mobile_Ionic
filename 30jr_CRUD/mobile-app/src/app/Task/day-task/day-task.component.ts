@@ -3,8 +3,9 @@ import {Router} from '@angular/router';
 import {TaskService} from '../../_Services/task.service';
 import {UserService} from '../../_Services/user.service';
 import { Task } from 'src/app/_Models/task';
-import {PopoverController} from '@ionic/angular';
+import {ModalController, PopoverController} from '@ionic/angular';
 import {PopoverComponent} from '../../_Utils/popover/popover.component';
+import {NotificationComponent} from '../../Containers/notification/notification.component';
 
 @Component({
   selector: 'app-day-task',
@@ -15,18 +16,19 @@ export class DayTaskComponent implements OnInit {
   private task: Task;
   private hasTask: boolean;
   private noTaskText: string;
-  private title: string;
+  private title = 'DÉFI DU JOUR';
+  private userId: number;
 
   constructor(
       private router: Router,
-      private taskService: TaskService,
       private userService: UserService,
-      private popoverController: PopoverController
+      private popoverController: PopoverController,
+      private modalController: ModalController
   ) { }
 
   ngOnInit() {
-    this.title = 'DÉFI DU JOUR';
-    this.userService.readTaskUser((Number)(sessionStorage.getItem('user'))).subscribe( response => {
+    this.userId = (Number)(sessionStorage.getItem('user'));
+    this.userService.readTaskUser(this.userId).subscribe( response => {
       if (response != null) {
         this.task = response;
         this.showTask();
@@ -34,6 +36,26 @@ export class DayTaskComponent implements OnInit {
         this.showNoTask();
       }
     });
+    this.userService.getDay(this.userId).subscribe( response => {
+      if (response != null) {
+        switch (response) {
+          case 3 : this.presentModal(10); break;
+          case 20 : this.presentModal(20); break;
+          case 30 : this.presentModal(30); break;
+        }
+      }
+    });
+  }
+
+  async presentModal(day: number) {
+    const modal = await this.modalController.create({
+      component: NotificationComponent,
+      cssClass: 'modal',
+      componentProps: {
+        notifDay: day
+      }
+    });
+    return await modal.present();
   }
 
   showNoTask() {
