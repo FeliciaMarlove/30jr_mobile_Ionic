@@ -15,9 +15,6 @@ export class NotificationComponent implements OnInit {
     }
 
     ngOnInit() {
-      if (this.notifDay) {
-        console.log(this.notifDay);
-      }
     }
 
     dismiss() {
