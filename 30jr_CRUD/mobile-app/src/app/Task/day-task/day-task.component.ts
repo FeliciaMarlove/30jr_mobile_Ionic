@@ -29,7 +29,6 @@ export class DayTaskComponent implements OnInit {
   ngOnInit() {
     this.userId = (Number)(sessionStorage.getItem('user'));
     this.userService.readTaskUser(this.userId).subscribe( response => {
-      console.log(response)
       if (response != null) {
         this.task = response;
         this.showTask();

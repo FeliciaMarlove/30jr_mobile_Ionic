@@ -21,7 +21,6 @@ export class ConnectionService {
     }
 
     public signup(user: User): Observable<any> {
-        sessionStorage.setItem('auth', btoa(user.email + ':' + user.password));
         return this.http.post<User>(URI + 'signup', user);
     }
 

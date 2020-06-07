@@ -44,7 +44,6 @@ export class LoginComponent implements OnInit {
   onLogin() {
     const DTO = {email: this.form.controls.username.value, password: this.form.controls.password.value};
     this.connectionService.connect(DTO).subscribe(response => {
-          // console.log(response);
           if (response !== null && response.userRole === 'USER') {
             this.connectionService.authenticated = true;
             sessionStorage.setItem('user', response.userId.toString());
