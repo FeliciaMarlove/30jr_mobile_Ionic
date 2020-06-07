@@ -47,12 +47,12 @@ export class SignupComponent implements OnInit {
   onSignup() {
     const DTO = {email: this.form.controls.username.value, password: this.form.controls.password.value, newsletter: this.form.controls.newsletter.value};
     this.connectionService.signup(DTO).subscribe(response => {
-          // console.log('response', response)
           if (response !== null && response.userId) {
             this.connectionService.authenticated = true;
             sessionStorage.setItem('user', response.userId.toString());
-            sessionStorage.setItem('auth', btoa(this.form.controls.username.value + ':' + this.form.controls.password.value));
-            this.router.navigateByUrl('').then(() => this.connectionService.connect(DTO).subscribe());
+            this.connectionService.connect(DTO).subscribe( r => {
+              this.router.navigateByUrl(this.dashboardUrl);
+            });
           } else {
             sessionStorage.setItem('auth', undefined);
             sessionStorage.clear();
