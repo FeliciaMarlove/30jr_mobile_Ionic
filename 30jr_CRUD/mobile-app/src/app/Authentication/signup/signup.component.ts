@@ -51,8 +51,7 @@ export class SignupComponent implements OnInit {
           if (response !== null && response.userId) {
             this.connectionService.authenticated = true;
             sessionStorage.setItem('user', response.userId.toString());
-            this.connectionService.connect(DTO).subscribe( );
-            this.router.navigateByUrl('./dashboard');
+            this.router.navigateByUrl('');
           } else {
             sessionStorage.setItem('auth', undefined);
             sessionStorage.clear();
