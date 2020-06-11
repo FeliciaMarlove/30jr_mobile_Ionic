@@ -7,6 +7,9 @@ import {ConnectionService} from '../../_Services/connection.service';
     templateUrl: './buttons.component.html',
     styleUrls: ['./buttons.component.scss'],
 })
+/**
+ * Container des boutons de déconnexion et accès à l'espace personnel
+ */
 export class ButtonsComponent implements OnInit {
 
     constructor(private router: Router, private connectionService: ConnectionService) {
@@ -15,24 +18,17 @@ export class ButtonsComponent implements OnInit {
     ngOnInit() {
     }
 
+    /**
+     * Déconnecte l'utilisateur.
+     */
     onLogout() {
         this.connectionService.logout();
     }
 
+    /**
+     * Navigue vers l'espace personnel.
+     */
     toPerso() {
-        console.log('perso');
         this.router.navigateByUrl('/dashboard/perso');
-    }
-
-    toPath() {
-        console.log('path');
-
-        this.router.navigateByUrl('/dashboard/path');
-    }
-
-    toTask() {
-        console.log('task');
-
-        this.router.navigateByUrl('/dashboard/task');
     }
 }

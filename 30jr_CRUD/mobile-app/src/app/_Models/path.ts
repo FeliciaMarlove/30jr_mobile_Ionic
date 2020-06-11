@@ -1,3 +1,7 @@
+/**
+ * Modèle parcours
+ */
+
 export class Path {
     pathId?: number;
     pathName: string;

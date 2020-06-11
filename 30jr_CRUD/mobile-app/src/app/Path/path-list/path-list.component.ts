@@ -5,6 +5,9 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './path-list.component.html',
   styleUrls: ['./path-list.component.scss'],
 })
+/*
+Non-utilisé
+ */
 export class PathListComponent implements OnInit {
 
   constructor() { }

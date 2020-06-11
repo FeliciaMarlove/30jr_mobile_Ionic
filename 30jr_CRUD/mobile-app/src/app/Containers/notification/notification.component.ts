@@ -6,6 +6,9 @@ import {ModalController} from '@ionic/angular';
     templateUrl: './notification.component.html',
     styleUrls: ['./notification.component.scss'],
 })
+/**
+ * Fenêtre qui s'affiche par dessus le contenu en le recouvrant complètement
+ */
 export class NotificationComponent implements OnInit {
     @Input() notifDay: number;
 
@@ -17,6 +20,9 @@ export class NotificationComponent implements OnInit {
     ngOnInit() {
     }
 
+    /**
+     * Ferme la fenêtre.
+     */
     dismiss() {
         this.modalController.dismiss({
             dismissed: true

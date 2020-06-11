@@ -3,6 +3,12 @@ import {HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
 
 @Injectable()
 export class XhrInterceptor implements HttpInterceptor {
+
+    /**
+     * Clone les headers pour toutes les requêtes http (Basic auth) excepté celles émanant de l'URL /signup
+     * @param req
+     * @param next
+     */
     intercept(req: HttpRequest<any>, next: HttpHandler) {
         const excludeUrl = '/signup';
         let xhr;

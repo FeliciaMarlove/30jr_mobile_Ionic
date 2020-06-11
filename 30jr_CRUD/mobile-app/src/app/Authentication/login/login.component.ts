@@ -9,6 +9,9 @@ import {AlertController} from '@ionic/angular';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
+/**
+ * Connexion à l'application.
+ */
 export class LoginComponent implements OnInit {
   private form: FormGroup;
   private dashboardUrl = '/dashboard/task';
@@ -20,6 +23,12 @@ export class LoginComponent implements OnInit {
       private alertController: AlertController
   ) { }
 
+  /**
+   * Vérifie si un utilisateur est déjà connect et navigue vers le tableau de bord si c'est le cas.
+   * Instancie un formulaire avec les champs suivants :
+   *  username (requis) : l'identifiant
+   *  password (requis) : le mot de passe
+   */
   ngOnInit() {
     if (sessionStorage.getItem('auth') !== null) {
       this.router.navigateByUrl(this.dashboardUrl);
@@ -30,6 +39,10 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  /**
+   * Prépare une fenêtre d'alerte asynchrone.
+   * @param msg le texte à afficher
+   */
   async showAlert(msg: string) {
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
@@ -41,6 +54,14 @@ export class LoginComponent implements OnInit {
     await alert.present();
   }
 
+  /**
+   * Tente une connexion à l'application avec l'identifiant et le mot de passe renseignés dans le formulaire.
+   * Vérifie que le rôle est "utilisateur final" :
+   *    Définit l'utilisteur comme connecté.
+   *    Enregistre l'ID de l'utilisateur dans une variable de session.
+   *    Navigue vers le tableau de bord.
+   * Nettoie les variables de session et affiche une alerte en cas d'échec de connexion.
+   */
   onLogin() {
     const DTO = {email: this.form.controls.username.value, password: this.form.controls.password.value};
     this.connectionService.connect(DTO).subscribe(response => {

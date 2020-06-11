@@ -11,6 +11,9 @@ import {NotificationComponent} from '../../Containers/notification/notification.
     templateUrl: './path-choice.component.html',
     styleUrls: ['./path-choice.component.scss'],
 })
+/**
+ * Choix du parcours.
+ */
 export class PathChoiceComponent implements OnInit {
     private selectedPath: Path;
     private paths: Path[];
@@ -22,6 +25,9 @@ export class PathChoiceComponent implements OnInit {
     ) {
     }
 
+    /**
+     * Récupère les parcours.
+     */
     ngOnInit() {
         this.pathService.readPaths().subscribe(
             paths => {
@@ -30,6 +36,11 @@ export class PathChoiceComponent implements OnInit {
         );
     }
 
+    /**
+     * Prépare une fenêtre pop-over pour afficher la description longue du parcours.
+     * @param ev l'événement qui provoque l'apparition
+     * @param path le parcours sélectionné
+     */
     async presentPopover(ev: any, path: Path) {
         const popover = await this.popoverController.create({
             // component where the template is :
@@ -45,6 +56,11 @@ export class PathChoiceComponent implements OnInit {
         return await popover.present();
     }
 
+    /**
+     * Crée une relation utilisateur-parcours.
+     * Affiche les logs en cas d'échec.
+     * Navigue vers le tableau de bord en cas de réussite.
+     */
     onStart() {
         this.pathService.startPath(this.selectedPath.pathId, (Number)(sessionStorage.getItem('user'))).subscribe(response => {
                 if (response.msg) {
@@ -56,6 +72,10 @@ export class PathChoiceComponent implements OnInit {
         );
     }
 
+    /**
+     * Sélectionne un parcours.
+     * @param path le parcours sélectionné
+     */
     onSelect(path: Path) {
         this.selectedPath = path;
     }

@@ -9,6 +9,9 @@ import {AlertController} from '@ionic/angular';
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.scss'],
 })
+/**
+ * Création d'un compte utilisateur.
+ */
 export class SignupComponent implements OnInit {
   private form: FormGroup;
   private mailPat: RegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -22,6 +25,13 @@ export class SignupComponent implements OnInit {
       private alertController: AlertController
   ) { }
 
+  /**
+   * Vérifie si un utilisateur est déjà connect et navigue vers le tableau de bord si c'est le cas.
+   * Instancie un formulaire avec les champs suivants :
+   *  username (requis, format e-amil) : l'identifiant
+   *  password (requis, format mot de passe dont les contraintes sont : min. 8 car., au moins 1 Maj. + 1 min. + 1 chiffre + 1 car. spécial) : le mot de passe
+   *  newsletter (false) : l'inscription à la newsletter
+   */
   ngOnInit() {
     if (sessionStorage.getItem('auth') !== null) {
       this.router.navigateByUrl(this.dashboardUrl);
@@ -33,6 +43,10 @@ export class SignupComponent implements OnInit {
     });
   }
 
+  /**
+   * Prépare une fenêtre d'alerte asynchrone.
+   * @param msg le texte à afficher
+   */
   async showAlert(msg: string) {
     const alert = await this.alertController.create({
       // cssClass: 'my-custom-class',
@@ -44,6 +58,14 @@ export class SignupComponent implements OnInit {
     await alert.present();
   }
 
+  /**
+   * Tente la création d'un compte utilisateur avec l'identifiant et le mot de passe renseignés dans le formulaire.
+   * En cas de réussite :
+   *    Définit l'utilisteur comme connecté.
+   *    Enregistre l'ID de l'utilisateur dans une variable de session.
+   *    Navigue vers le tableau de bord.
+   * Nettoie les variables de session et affiche une alerte en cas d'échec de connexion.
+   */
   onSignup() {
     const DTO = {email: this.form.controls.username.value, password: this.form.controls.password.value, newsletter: this.form.controls.newsletter.value};
     this.connectionService.signup(DTO).subscribe(response => {
