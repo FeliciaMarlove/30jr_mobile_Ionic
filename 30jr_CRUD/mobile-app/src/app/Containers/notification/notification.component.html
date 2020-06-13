@@ -1,13 +1,29 @@
 
 <ion-content>
-  <div *ngIf="notifDay === 10">
-    Le texte du jour 10
+  <div *ngIf="notifDay < 11">
+    <br>
+    (PLACEHOLDER)
+    <br><br>
+    Notification jusqu'au jour 10
+    <br><br>
+    Ceci est une notification in-app (modale)
+    <br><br>
+    Implémentation back-end + styling dans la prochaine version
+    <br><br>
   </div>
-  <div *ngIf="notifDay === 20">
-    Le texte du jour 20
+  <div *ngIf="notifDay > 10 && notifDay < 21">
+    notification jusqu'au jour 20
+
+    Ceci est une notification in-app (modale)
+
+    Implémentation back-end à prévoir
   </div>
-  <div *ngIf="notifDay === 30">
-    Le texte du jour 30
+  <div *ngIf="notifDay > 20 && notifDay <= 30">
+    notification jusqu'au jour 30
+
+    Ceci est une notification in-app (modale)
+
+    Implémentation back-end à prévoir
   </div>
   <ion-button (click)="dismiss()">Continuer</ion-button>
 </ion-content>

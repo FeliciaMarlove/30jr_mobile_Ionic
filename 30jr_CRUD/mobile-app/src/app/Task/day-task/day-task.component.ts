@@ -45,11 +45,7 @@ export class DayTaskComponent implements OnInit {
     });
     this.userService.getDay(this.userId).subscribe( response => {
       if (response != null) {
-        switch (response) {
-          case 10 : this.presentModal(10); break;
-          case 20 : this.presentModal(20); break;
-          case 30 : this.presentModal(30); break;
-        }
+          this.presentModal(response);
       }
     });
   }

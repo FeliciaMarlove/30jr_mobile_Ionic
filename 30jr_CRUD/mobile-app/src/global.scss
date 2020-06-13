@@ -43,8 +43,13 @@ ion-input, ion-checkbox, .in-form {
   text-align: left !important;
 }
 
-.popover {
-  padding: 15px;
+app-buttons ion-button {
+  font-size: small;
+}
+
+.popover div {
+  padding: 7px;
+  text-align: left !important;
 }
 
 .center {
@@ -62,8 +67,12 @@ ion-input, ion-checkbox, .in-form {
   width: 70%;
 }
 
+// The text size can be set with a vw unit, which means the "viewport width".
+//That way the text size will follow the size of the browser window
+// https://www.w3schools.com/howto/howto_css_responsive_text.asp
+
 ion-title {
-  font-size: 29px;
+  font-size: 6.5vw;
   padding: 25px;
   opacity: 95%;
   font-family: Pacifico Regular, Arial, serif;

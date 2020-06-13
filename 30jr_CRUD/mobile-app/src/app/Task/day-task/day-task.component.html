@@ -1,20 +1,29 @@
-<div *ngIf="hasTask === false">
-    {{noTaskText}}
-    <ion-button [routerLink]="['/dashboard/path']">Voir les parcours</ion-button>
-</div>
-<div *ngIf="hasTask === true"
-     style="border: orange 1px solid;
-     padding: 15px"
+<ion-content
+        style="border: orange 1px solid;
+        padding: 15px"
 >
-    {{title}}
-    <br><br>
-    {{task.taskName}}
-    <br><br>
-    {{task.taskShortDescription}}
-    <br><br>
-    <div *ngIf="task.taskLongDescription">
-        plus d'astuces sur ce défi
-        <ion-icon style="font-size: 25px" name="add-circle" (click)="presentPopover($event)">
-        </ion-icon>
-    </div>
-</div>
+    <ion-item lines="none" *ngIf="hasTask === false">
+        <div>
+            {{noTaskText}}
+            <ion-button [routerLink]="['/dashboard/path']">Voir les parcours</ion-button>
+        </div>
+    </ion-item>
+    <ion-item lines="none" *ngIf="hasTask === true">
+        <div>
+            <!--    {{title}}-->
+            <!--    <br><br>-->
+            <ion-text>
+                {{task.taskName}}
+                <br><br>
+                {{task.taskShortDescription}}
+                <br><br>
+                <div *ngIf="task.taskLongDescription">
+                    plus d'astuces sur ce défi
+                    <ion-icon style="font-size: 25px" name="add-circle" (click)="presentPopover($event)">
+                    </ion-icon>
+                </div>
+            </ion-text>
+        </div>
+    </ion-item>
+</ion-content>
+

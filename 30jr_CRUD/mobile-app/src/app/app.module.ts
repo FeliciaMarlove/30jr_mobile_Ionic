@@ -38,7 +38,7 @@ import {PopoverComponent} from './_Utils/popover/popover.component';
         PathListComponent,
         PersonalSpaceComponent,
         DayTaskComponent,
-        PopoverComponent
+        PopoverComponent,
     ],
     entryComponents: [],
     imports: [
