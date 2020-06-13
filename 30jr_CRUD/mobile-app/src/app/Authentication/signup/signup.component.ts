@@ -26,7 +26,7 @@ export class SignupComponent implements OnInit {
   ) { }
 
   /**
-   * Vérifie si un utilisateur est déjà connect et navigue vers le tableau de bord si c'est le cas.
+   * Vérifie si un utilisateur est déjà connecté et navigue vers le tableau de bord si c'est le cas.
    * Instancie un formulaire avec les champs suivants :
    *  username (requis, format e-amil) : l'identifiant
    *  password (requis, format mot de passe dont les contraintes sont : min. 8 car., au moins 1 Maj. + 1 min. + 1 chiffre + 1 car. spécial) : le mot de passe

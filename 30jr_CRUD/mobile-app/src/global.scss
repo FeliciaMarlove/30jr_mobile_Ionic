@@ -32,7 +32,7 @@
 }
 
 ion-icon {
-  font-size: 42px;
+  font-size: 25px;
 }
 
 app-personal-space, app-day-task, app-path-choice {
@@ -43,7 +43,7 @@ ion-input, ion-checkbox, .in-form {
   text-align: left !important;
 }
 
-app-buttons ion-button {
+app-buttons ion-button, app-personal-space ion-button {
   font-size: small;
 }
 

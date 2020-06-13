@@ -18,7 +18,7 @@ export class PathService {
     }
 
     /**
-     * Récupère tous les parcours.
+     * Récupère les parcours.
      * Retourne un Observable de type array de Path
      */
     public readPaths(): Observable<Path[]> {

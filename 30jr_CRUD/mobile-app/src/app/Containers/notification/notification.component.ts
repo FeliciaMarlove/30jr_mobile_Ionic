@@ -26,13 +26,13 @@ export class NotificationComponent implements OnInit {
     dismiss() {
         this.modalController.dismiss({
             dismissed: true
-            // can optionally pass data
-            /*
-            After being dismissed, the data can be read in through the onWillDismiss or onDidDismiss attached to the modal after creation:
-              const { data } = await modal.onWillDismiss();
-              console.log(data);
-             */
         });
     }
 
+    // dismiss can optionally pass data
+    /*
+    After being dismissed, the data can be read in through the onWillDismiss or onDidDismiss attached to the modal after creation:
+      const { data } = await modal.onWillDismiss();
+      console.log(data);
+     */
 }

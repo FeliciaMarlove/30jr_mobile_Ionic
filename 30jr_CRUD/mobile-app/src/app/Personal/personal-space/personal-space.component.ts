@@ -54,7 +54,7 @@ export class PersonalSpaceComponent implements OnInit {
   }
 
   /**
-   * Préparer une ferêtre de confirmation asynchrone pour la suppression du compte utilisateur.
+   * Prépare une fenêtre de confirmation asynchrone pour la suppression du compte utilisateur.
    */
   async confirmAlert() {
     const alert = await this.alertController.create({
@@ -131,7 +131,7 @@ export class PersonalSpaceComponent implements OnInit {
   }
 
   /*
-   * à implémenter : envoi d'e-mails ou de messages via une messagerie, solution à définir 
+   * à implémenter : envoi d'e-mails ou de messages via une messagerie, solution à définir
    */
   onSend() {
     this.showAlert('Ce bouton permettra bientôt d\'envoyer un message à l\'administrateur');

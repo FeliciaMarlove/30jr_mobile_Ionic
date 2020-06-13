@@ -31,7 +31,7 @@ export class DayTaskComponent implements OnInit {
   /**
    * Récupère l'ID de l'utilisateur connecté.
    * Récupère la tâche du jour de l'utilisateur connecté.
-   * Récupère le jour en cours de l'utilisateur connecté et affiche une fenêtre si le jour === 10 || 20 || 30.
+   * Récupère le jour en cours de l'utilisateur connecté et affiche une fenêtre de notification.
    */
   ngOnInit() {
     this.userId = (Number)(sessionStorage.getItem('user'));
@@ -44,6 +44,7 @@ export class DayTaskComponent implements OnInit {
       }
     });
     this.userService.getDay(this.userId).subscribe( response => {
+      // modèle actuel : récupère le numéro du jour en cours -> trigger une notif en fonction du jour (plage) :
       if (response != null) {
           this.presentModal(response);
       }

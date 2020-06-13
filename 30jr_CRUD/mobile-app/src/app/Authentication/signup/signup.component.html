@@ -6,6 +6,11 @@
       <br>
       Inscription
       <br><br>
+      <div style="text-align: left; padding: 7px">
+        <ion-text *ngIf="form.controls.username.dirty && form.controls.username.invalid"><bde style="font-size: small !important;">Le format d'e-mail n'est pas valide.</bde></ion-text>
+        <br>
+        <ion-text *ngIf="form.controls.password.dirty && form.controls.password.invalid"><bde style="font-size: small !important;">Le mot de passe doit contenir au moins 8 caractères dont 1 majuscule, 1 minuscule, 1 chiffre et 1 caractère spécial (@#!&$). Les caractères accentués ne sont pas autorisés.</bde></ion-text>
+      </div>
       <ion-item>
         <ion-input formControlName="username" placeholder="Identifiant" type="email"></ion-input>
       </ion-item>
@@ -18,11 +23,6 @@
         </ion-item>
       <ion-button color="primary" type="submit" [disabled]="form.invalid">S'inscrire</ion-button>
     </form>
-    <div style="text-align: left; font-size: 13px">
-      <ion-text *ngIf="form.dirty && form.controls.username.invalid">Le format d'e-mail n'est pas valide.</ion-text>
-      <br>
-      <ion-text *ngIf="form.controls.password.invalid && form.dirty">Le mot de passe doit contenir au moins 8 caractères dont 1 majuscule, 1 minuscule, 1 chiffre et 1 caractère spécial (@#!&$). Les caractères accentués ne sont pas autorisés.</ion-text>
-    </div>
     <div style="text-align: center; padding-top: 25px">
       <ion-button [routerLink]="['./..']" color="tertiary">J'ai déjà un compte</ion-button>
     </div>
