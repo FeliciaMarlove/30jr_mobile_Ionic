@@ -32,10 +32,10 @@ export class PersonalSpaceComponent implements OnInit {
    * Appelle initPersonal()
    */
   ngOnInit() {
-    this.initPersonal();
   }
 
   ionViewWillEnter(){
+    this.initPersonal();
   }
 
   /**
@@ -135,5 +135,18 @@ export class PersonalSpaceComponent implements OnInit {
    */
   onSend() {
     this.showAlert('Ce bouton permettra bientôt d\'envoyer un message à l\'administrateur');
+  }
+
+  /**
+   * Gère la navigation depuis l'espace personnel vers "home"
+   * Redirige vers le tableau de bord si l'e-mail n'est pas été modifié
+   * Redirige vers la page d'accueil pour une reconnexion si l'e-mail a été modifié
+   */
+  toHome() {
+    if (this.form.controls.email.pristine) {
+      this.router.navigateByUrl('/dashboard/task');
+    } else {
+      this.router.navigateByUrl('');
+    }
   }
 }

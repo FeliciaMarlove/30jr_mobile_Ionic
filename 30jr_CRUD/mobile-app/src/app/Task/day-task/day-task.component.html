@@ -1,6 +1,6 @@
 <ion-content
         style="border: orange 1px solid;
-        padding: 15px"
+        padding: 15px;"
 >
     <ion-item lines="none" *ngIf="hasTask === false">
         <div>
@@ -9,21 +9,19 @@
         </div>
     </ion-item>
     <ion-item lines="none" *ngIf="hasTask === true">
-        <div>
+        <ion-text style="text-align: left; padding-top: 10px">
             <!--    {{title}}-->
             <!--    <br><br>-->
-            <ion-text>
+
                 {{task.taskName}}
                 <br><br>
                 {{task.taskShortDescription}}
                 <br><br>
                 <div *ngIf="task.taskLongDescription">
-                    plus d'astuces sur ce défi
-                    <ion-icon style="font-size: 25px" name="add-circle" (click)="presentPopover($event)">
-                    </ion-icon>
+                    plus de conseils
+                    <ion-icon style="font-size: 25px" name="add-circle" (click)="presentPopover($event)"></ion-icon>
                 </div>
-            </ion-text>
-        </div>
+        </ion-text>
     </ion-item>
 </ion-content>
 

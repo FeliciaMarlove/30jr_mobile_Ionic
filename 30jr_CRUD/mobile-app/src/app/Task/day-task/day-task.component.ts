@@ -35,6 +35,9 @@ export class DayTaskComponent implements OnInit {
    */
   ngOnInit() {
     this.userId = (Number)(sessionStorage.getItem('user'));
+  }
+
+  ionViewWillEnter() {
     this.userService.readTaskUser(this.userId).subscribe( response => {
       if (response != null) {
         this.task = response;
@@ -46,7 +49,7 @@ export class DayTaskComponent implements OnInit {
     this.userService.getDay(this.userId).subscribe( response => {
       // modèle actuel : récupère le numéro du jour en cours -> trigger une notif en fonction du jour (plage) :
       if (response != null) {
-          this.presentModal(response);
+        //this.presentModal(response);
       }
     });
   }

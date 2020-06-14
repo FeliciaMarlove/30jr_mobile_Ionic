@@ -2,7 +2,7 @@
     <div style="margin-top: 8px">
         <ion-text class="in-title; " style="margin-left: 15px; float: left">Espace personnel</ion-text>
         <ion-icon name="mail" style="margin-right : 15px; float: right" (click)="onSend()"></ion-icon>
-        <ion-icon name="home" style="margin-right: 25px; float: right" [routerLink]="['./../task']"></ion-icon>
+        <ion-icon name="home" style="margin-right: 25px; float: right" (click)="toHome()"></ion-icon>
     </div>
     <br>
     <div>
@@ -23,8 +23,7 @@
                     </bdi>
                 </ion-text>
             </ion-item>
-            <ion-button color="primary" type="submit" [disabled]="form.pristine || form.invalid">Enregistrer
-            </ion-button>
+            <ion-button color="primary" type="submit" [disabled]="form.pristine || form.invalid">Enregistrer</ion-button>
             <br>
         </form>
     </div>
