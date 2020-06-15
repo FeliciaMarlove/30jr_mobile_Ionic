@@ -15,10 +15,10 @@ import {AlertController} from '@ionic/angular';
  * Gestion des données personnelles de l'utilisateur.
  */
 export class PersonalSpaceComponent implements OnInit {
-    private form: FormGroup;
-    private user: User;
+    form: FormGroup;
+    user: User;
     private mailPat: RegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  private success: boolean;
+    success: boolean;
 
   constructor(
       private fb: FormBuilder,

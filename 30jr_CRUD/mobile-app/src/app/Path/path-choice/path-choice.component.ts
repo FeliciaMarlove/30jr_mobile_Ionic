@@ -15,8 +15,8 @@ import {NotificationComponent} from '../../Containers/notification/notification.
  * Choix du parcours.
  */
 export class PathChoiceComponent implements OnInit {
-    private selectedPath: Path;
-    private paths: Path[];
+    selectedPath: Path;
+    paths: Path[];
 
     constructor(
         private popoverController: PopoverController,

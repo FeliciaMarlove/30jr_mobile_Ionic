@@ -15,11 +15,11 @@ import {NotificationComponent} from '../../Containers/notification/notification.
  * Affichage de la tâche du jour
  */
 export class DayTaskComponent implements OnInit {
-  private task: Task;
-  private hasTask: boolean;
-  private noTaskText: string;
-  private title = 'DÉFI DU JOUR';
-  private userId: number;
+  task: Task;
+  hasTask: boolean;
+  noTaskText: string;
+  title = 'DÉFI DU JOUR';
+  userId: number;
 
   constructor(
       private router: Router,

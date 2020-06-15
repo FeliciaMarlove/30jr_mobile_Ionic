@@ -13,7 +13,7 @@ import {AlertController} from '@ionic/angular';
  * Création d'un compte utilisateur.
  */
 export class SignupComponent implements OnInit {
-  private form: FormGroup;
+  form: FormGroup;
   private mailPat: RegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   private pwdPat: RegExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/;
   private dashboardUrl = './../dashboard/task';

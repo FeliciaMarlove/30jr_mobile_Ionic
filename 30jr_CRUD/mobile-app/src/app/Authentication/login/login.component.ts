@@ -13,7 +13,7 @@ import {AlertController} from '@ionic/angular';
  * Connexion à l'application.
  */
 export class LoginComponent implements OnInit {
-  private form: FormGroup;
+  form: FormGroup;
   private dashboardUrl = '/dashboard/task';
 
   constructor(

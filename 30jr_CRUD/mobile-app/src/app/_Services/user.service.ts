@@ -3,8 +3,8 @@ import {HttpClient} from '@angular/common/http';
 import {User} from '../_Models/user';
 import {Observable} from 'rxjs';
 
-const URI = 'http://localhost:8080/api/user/';
-const URI_TASKUSER = 'http://localhost:8080/api/userpath/';
+const URI = '/api/user/';
+const URI_TASKUSER = '/api/userpath/';
 
 @Injectable({
   providedIn: 'root'
