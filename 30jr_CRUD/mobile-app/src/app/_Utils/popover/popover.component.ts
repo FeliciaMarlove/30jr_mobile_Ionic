@@ -11,7 +11,7 @@ import {NavParams, PopoverController} from '@ionic/angular';
  * Fenêtre qui s'affiche par dessus le contenu sans le recouvrir complètement
  */
 export class PopoverComponent implements OnInit {
-  private show: string;
+  show: string;
 
   constructor(private navParams: NavParams) { }
 
